@@ -177,13 +177,13 @@ def print_word_by_word(sentence: str, delay: float = 1.0) -> tuple:
     words = sentence.split()
     for i, word in enumerate(words):
         list_of_words.append(word)
-        #sys.stdout.write(word)
-        #sys.stdout.flush()
+        sys.stdout.write(word)
+        sys.stdout.flush()
 
         # Add space after word (except for last word and punctuation)
-        #if i < len(words) - 1 and not words[i+1] in ['.', ',', '!', '?', ';', ':']:
-            #sys.stdout.write(' ')
-            #sys.stdout.flush()
+        if i < len(words) - 1 and not words[i+1] in ['.', ',', '!', '?', ';', ':']:
+            sys.stdout.write(' ')
+            sys.stdout.flush()
 
         # Delay between words
 
@@ -319,7 +319,7 @@ def print_query_results_word_by_word(results: set, delay: float = 1.0) -> tuple:
     # We are interested in the last word from the `words` list, not `list_of_words` global
     # The `completed` flag will always be True now.
     printed_words_list, completed = print_word_by_word(results_str, delay)
-    #sys.stdout.write('\n') # Add newline after printing all words
+    sys.stdout.write('\n') # Add newline after printing all words
     sys.stdout.flush()
 
     if printed_words_list: # Check if anything was actually printed
@@ -396,11 +396,11 @@ def auto_chain_queries(vocab_cache: VocabularyCache, word_delay: float, num_iter
             break
 
         current_category_name = categories[current_category_idx] # Actual name of category
-        #print(f"\nIteration {i+1}/{num_iterations}: Querying for words related to '{current_word}' (from category '{current_category_name}')")
+        print(f"\nIteration {i+1}/{num_iterations}: Querying for words related to '{current_word}' (from category '{current_category_name}')")
         
         next_category_idx = (current_category_idx + 1) % len(categories)
         next_category_name = categories[next_category_idx]
-        #print(f"Looking for results in category: '{next_category_name}'")
+        print(f"Looking for results in category: '{next_category_name}'")
 
 
         out = set()
